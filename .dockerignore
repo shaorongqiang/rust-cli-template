@@ -1,0 +1,70 @@
+# Git 相关
+.git
+.gitignore
+.gitattributes
+
+# 构建产物
+target/
+Cargo.lock
+
+# 日志文件
+*.log
+logs/
+
+# 配置文件
+*.toml
+*.pem
+config/
+
+# 数据文件
+data/
+*.db
+*.sqlite
+
+# 临时文件
+tmp/
+temp/
+.tmp/
+
+# IDE 和编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# Docker 相关
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# 文档
+README.md
+docs/
+*.md
+
+# 测试文件
+tests/
+test_*
+
+# 脚本文件
+scripts/
+*.sh
+
+# 环境文件
+.env
+.env.local
+.env.*.local
+
+# 依赖目录
+node_modules/
+vendor/
+
+# 其他
+*.bak
+*.backup
+*.orig

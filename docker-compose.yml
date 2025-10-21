@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Rust CLI 应用程序
+  rust-cli-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rust-cli-template
+    restart: unless-stopped
+    ports:
+      - "8580:8580"
+    environment:
+      # 日志配置
+      - LOG_LEVEL=info
+      - LOG_DIR=/app/logs
+
+      # 服务器配置
+      - SERVER_LISTEN=0.0.0.0:8580
+      - SERVER_ACCESS_URL=http://localhost:8580
+
+      # 数据库配置
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/rust_cli_db
+      - DATABASE_ENABLE_LOGGING=false
+
+      # JWT 配置
+      - TOKEN_ACCESS_KEY_PATH=/app/config/access_key.pem
+      - TOKEN_REFRESH_KEY_PATH=/app/config/refresh_key.pem
+
+      # Rust 配置
+      - RUST_LOG=info
+      - RUST_BACKTRACE=1
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+      - ./data:/app/data
+    healthcheck:
+      test: [ "CMD", "./rust-cli-template", "--help" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
