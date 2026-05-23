@@ -1,0 +1,48 @@
+[package]
+name = "application"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT"
+repository = "https://github.com/shaorongqiang/rust-cli-template"
+readme = "README.md"
+
+[[bin]]
+name = "rust-cli-template"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.6", features = ["derive", "env"] }
+clap_complete = "4.6"
+
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+tracing-error = "0.2"
+tracing = "0.1"
+
+tokio = { version = "1.53", features = ["macros", "rt-multi-thread", "signal"] }
+
+axum = "0.8"
+axum-anyhow = "0.11"
+
+jwt-simple = { version = "0.13", default-features = false, features = ["pure-rust"] }
+url = { version = "2.5", features = ["serde"] }
+
+serde = { version = "1.0", features = ["derive"] }
+tempfile = "3.27"
+toml = "0.9"
+
+[lints.rust]
+warnings = "deny"
+#unused_crate_dependencies = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
